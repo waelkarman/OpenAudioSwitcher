@@ -105,9 +105,49 @@ int main(int argc, char *argv[]) {
   
   data.pipeline = gst_pipeline_new ("open-audio-video-pipeline");
   
-  if (!data.pipeline || !data.videosink || !data.gtkglsink || !data.source || !data.aconvert || !data.audio_queue || !data.video_queue || !data.vconvert || !data.resample || !data.asink || !data.gtkglsink){
-    g_printerr ("Not all elements could be created.\n");
+  if (!data.pipeline) {
+    g_printerr("Pipeline could not be created.\n");
     return -1;
+  }
+  if (!data.videosink) {
+      g_printerr("Video sink could not be created.\n");
+      return -1;
+  }
+  if (!data.gtkglsink) {
+      g_printerr("GTK GL sink could not be created.\n");
+      return -1;
+  }
+  if (!data.source) {
+      g_printerr("Source could not be created.\n");
+      return -1;
+  }
+  if (!data.aconvert) {
+      g_printerr("Audio converter could not be created.\n");
+      return -1;
+  }
+  if (!data.audio_queue) {
+      g_printerr("Audio queue could not be created.\n");
+      return -1;
+  }
+  if (!data.video_queue) {
+      g_printerr("Video queue could not be created.\n");
+      return -1;
+  }
+  if (!data.vconvert) {
+      g_printerr("Video converter could not be created.\n");
+      return -1;
+  }
+  if (!data.resample) {
+      g_printerr("Resampler could not be created.\n");
+      return -1;
+  }
+  if (!data.asink) {
+      g_printerr("Audio sink could not be created.\n");
+      return -1;
+  }
+  if (!data.gtkglsink) {
+      g_printerr("GTK GL sink could not be created.\n");
+      return -1;
   }
   
   /* Select the source */
@@ -118,7 +158,7 @@ int main(int argc, char *argv[]) {
     strcat(copy, argv[1]);
     g_object_set (data.source, "uri", copy, NULL);
   }else{
-    g_object_set (data.source, "uri", "https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm", NULL);
+    g_object_set (data.source, "uri", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", NULL);
   }
 
   /* Set gtk widget as sink video */
